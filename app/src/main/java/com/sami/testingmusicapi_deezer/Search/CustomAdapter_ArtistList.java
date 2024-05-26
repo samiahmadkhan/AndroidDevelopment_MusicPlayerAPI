@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sami.testingmusicapi_deezer.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapter_ArtistList extends RecyclerView.Adapter<CustomAdapter_ArtistList.ViewHolder> {
 
 
-    private List<String> localDataSet;
-    private List<String> Artlists;
-    private int size;
-//    AdapterView.OnItemClickListener listener;
+    private ArrayList<String> localDataSet;
+    private ArrayList<String> Artlists;
+
 
 
     /**
@@ -37,7 +37,7 @@ public class CustomAdapter_ArtistList extends RecyclerView.Adapter<CustomAdapter
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.textView2);
+            textView = (TextView) view.findViewById(R.id.textView4);
             imageView=view.findViewById(R.id.imageView);
 
         }
@@ -56,7 +56,7 @@ public class CustomAdapter_ArtistList extends RecyclerView.Adapter<CustomAdapter
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView
      */
-    public CustomAdapter_ArtistList(List<String> dataSet,List<String> artists) {
+    public CustomAdapter_ArtistList(ArrayList<String> dataSet, ArrayList<String> artists) {
         localDataSet = dataSet;
         Artlists=artists;
     }
@@ -74,6 +74,7 @@ public class CustomAdapter_ArtistList extends RecyclerView.Adapter<CustomAdapter
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Picasso.get().load(localDataSet.get(position)).into(viewHolder.getImageView());
+
         viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
