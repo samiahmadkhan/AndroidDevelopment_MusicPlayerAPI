@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,6 +46,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        SearchView search =findViewById(R.id.searchName);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Handle query submission
+                Toast.makeText(MainActivity.this, "Query Submitted: " + query, Toast.LENGTH_SHORT).show();
+                // Perform the final search operation
+                Intent intent=new Intent(MainActivity.this, SearchArtist.class);
+                intent.putExtra("name",query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Handle text change
+               // Toast.makeText(MainActivity.this, "Text Changed: " + newText, Toast.LENGTH_SHORT).show();
+                // Perform real-time search operation or suggestions
+                return false;
+            }
+        });
 
         getTopArrtistName(new DataCallback() {
             @Override
@@ -62,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
     public interface DataCallback {
         void onDataLoaded(ArrayList<String> names);

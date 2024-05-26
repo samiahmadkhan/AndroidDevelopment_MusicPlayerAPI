@@ -74,6 +74,8 @@ public class CustomAdapter_ArtistList extends RecyclerView.Adapter<CustomAdapter
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Picasso.get().load(localDataSet.get(position)).into(viewHolder.getImageView());
+        viewHolder.getTextView().setText(Artlists.get(viewHolder.getAdapterPosition()));
+
 
         viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
             @Override
